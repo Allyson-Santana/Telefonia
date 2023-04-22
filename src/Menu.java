@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Menu {
    public static void exibirMenu() {
        Scanner scanner = new Scanner(System.in);
-       Menu menu = new Menu();
+       Telefonia telefonia = new Telefonia();
        int opcao = 0;
 
        do {
@@ -23,58 +23,28 @@ public class Menu {
        switch (opcao) {
            case 1:
                System.out.println("Cadastrar assinante...");
-               menu.cadastrarAssinante();
+               telefonia.cadastrarAssinante();
                break;
            case 2:
                System.out.println("Listar assinantes...");
-               menu.listarAssinante();
+               telefonia.listarAssinante();
                break;
            case 3:
                System.out.println("Fazer chamada...");
-               menu.fazerChamada();
+               telefonia.fazerChamada();
                break;
            case 4:
                System.out.println("Fazer recarga...");
-               menu.fazerRecarga();
+               telefonia.fazerRecarga();
                break;
            case 5:
                System.out.println("Imprimir faturas...");
-               menu.implimirFaturas();
+               telefonia.implimirFaturas();
                break;
            case 6:
                System.out.println("Sair do programa...");
-               menu.sairDoPrograma();
+               telefonia.sairDoPrograma();
                break;
        }
    }
-
-    public void cadastrarAssinante() {
-        /** O sistema deverá solicitar o tipo de assinante, pré-pago ou pós-pago.
-         Depois solicitar os dados do assinante específico; */
-    }
-
-    public void listarAssinante() {
-       /** O sistema deverá listar os dados de todos os assinantes pré-pagos e
-        pós-pagos cadastrados; */
-    }
-
-    public void fazerChamada() {
-       /** O sistema deverá solicitar o tipo de assinante e seu CPF. Depois solicitar os
-        dados da chamada, data e duração; */
-    }
-
-    public void fazerRecarga() {
-       /** O sistema deverá solicitar o CPF de um assinante pré-pago. Depois solicitar a
-        data e o valor da recarga;*/
-    }
-
-    public void implimirFaturas() {
-       /** O sistema deverá solicitar o mês e imprimir todas as faturas dos assinantes
-        pré-pagos e pós-pagos;*/
-    }
-
-    public void sairDoPrograma() {
-       /** encerra a execução do programa. */
-    }
-
 }
