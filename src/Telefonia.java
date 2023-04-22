@@ -37,7 +37,8 @@ public class Telefonia {
 
     public static void main(String[] args) {
         System.out.println("Welcome The Telefonia");
-        Menu.exibirMenu();
+        Menu menu = new Menu();
+        menu.exibirMenu();
     }
 
 }

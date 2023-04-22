@@ -1,8 +1,13 @@
 import java.util.Scanner;
 
 public class Menu {
-   public static void exibirMenu() {
-       Scanner scanner = new Scanner(System.in);
+
+    private Scanner scanner;
+
+    public Menu() {
+        this.scanner = new Scanner(System.in);
+    }
+   public void exibirMenu() {
        Telefonia telefonia = new Telefonia();
        int opcao = 0;
 
