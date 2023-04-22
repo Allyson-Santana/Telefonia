@@ -8,7 +8,7 @@ public class Telefonia {
      Depois solicitar os dados do assinante específico; */
     public void cadastrarAssinante() {
         GerenciadorEntrada gerenciadorEntrada = GerenciadorEntrada.getInstancia();
-        EnumClassificaçãoAssinantes tipoAssinante = gerenciadorEntrada.solicitarTipoAssinante();
+        EnumClassificacaoAssinantes tipoAssinante = gerenciadorEntrada.solicitarTipoAssinante();
         String[] dadosAssinante = gerenciadorEntrada.solicitarDadosAssinante();
 
         System.out.println(tipoAssinante);

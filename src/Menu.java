@@ -21,7 +21,7 @@ public class Menu {
 
            opcao = input.getOpcao();
 
-       } while(opcao < 1 && opcao > 6);
+       } while(opcao < 1 || opcao > 6);
 
        switch (opcao) {
            case 1:
@@ -48,6 +48,8 @@ public class Menu {
                System.out.println("Sair do programa...");
                telefonia.sairDoPrograma();
                break;
+           default:
+               System.out.println("Opção inválida...");
        }
    }
 }

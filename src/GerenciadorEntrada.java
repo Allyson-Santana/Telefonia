@@ -21,15 +21,15 @@ public class GerenciadorEntrada {
         return instancia;
     }
 
-    public EnumClassificaçãoAssinantes solicitarTipoAssinante() {
+    public EnumClassificacaoAssinantes solicitarTipoAssinante() {
         System.out.println("Digite o tipo de assinante (PREPAGO ou POSPAGO): ");
-        EnumClassificaçãoAssinantes classificaçãoAssinantes = null;
+        EnumClassificacaoAssinantes classificaçãoAssinantes = null;
         boolean entradaValida = false;
 
         do {
             String input = scanner.nextLine().toUpperCase();
             try {
-                classificaçãoAssinantes = EnumClassificaçãoAssinantes.valueOf(input);
+                classificaçãoAssinantes = EnumClassificacaoAssinantes.valueOf(input);
                 entradaValida = true;
             } catch (IllegalArgumentException e) {
                 System.out.println("Valor inválido. Digite PREPAGO ou POSPAGO: ");
