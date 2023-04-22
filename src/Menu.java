@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private Scanner scanner;
+    private GerenciadorEntrada input;
 
     public Menu() {
-        this.scanner = new Scanner(System.in);
+        this.input = GerenciadorEntrada.getInstancia();
     }
    public void exibirMenu() {
        Telefonia telefonia = new Telefonia();
@@ -19,15 +19,13 @@ public class Menu {
            System.out.println("(5) Imprimir faturas.");
            System.out.println("(6) Sair do programa.");
 
-           System.out.print("\nDigite sua opção: ");
-           opcao = scanner.nextInt();
-       } while(opcao < 1 && opcao > 6);
+           opcao = input.getOpcao();
 
-       scanner.close();
+       } while(opcao < 1 && opcao > 6);
 
        switch (opcao) {
            case 1:
-               System.out.println("Cadastrar assinante...");
+               //System.out.println("Cadastrar assinante...");
                telefonia.cadastrarAssinante();
                break;
            case 2:

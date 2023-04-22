@@ -1,15 +1,42 @@
 import java.util.Scanner;
 
 public class GerenciadorEntrada {
+    private static GerenciadorEntrada instancia;
     private Scanner scanner;
 
-    public GerenciadorEntrada() {
-        this.scanner = new Scanner(System.in);
+    private GerenciadorEntrada() {
+        instanceScanner();
     }
 
-    public String solicitarTipoAssinante() {
-        System.out.println("Digite o tipo de assinante (pre ou pos): ");
-        return scanner.nextLine().toLowerCase();
+    public void instanceScanner() {
+        if (scanner == null) {
+            this.scanner = new Scanner(System.in);
+        }
+    }
+
+    public static GerenciadorEntrada getInstancia() {
+        if (instancia == null) {
+            instancia = new GerenciadorEntrada();
+        }
+        return instancia;
+    }
+
+    public EnumClassificaçãoAssinantes solicitarTipoAssinante() {
+        System.out.println("Digite o tipo de assinante (PREPAGO ou POSPAGO): ");
+        EnumClassificaçãoAssinantes classificaçãoAssinantes = null;
+        boolean entradaValida = false;
+
+        do {
+            String input = scanner.nextLine().toUpperCase();
+            try {
+                classificaçãoAssinantes = EnumClassificaçãoAssinantes.valueOf(input);
+                entradaValida = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Valor inválido. Digite PREPAGO ou POSPAGO: ");
+            }
+        } while (!entradaValida);
+
+        return classificaçãoAssinantes;
     }
 
     public String solicitarCpfAssinante() {
@@ -49,5 +76,12 @@ public class GerenciadorEntrada {
     public String solicitarMesFaturas() {
         System.out.println("Digite o mês das faturas: ");
         return scanner.nextLine();
+    }
+
+    public int getOpcao() {
+        System.out.print("\nDigite sua opção: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+        return opcao;
     }
 }

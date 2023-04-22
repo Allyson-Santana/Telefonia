@@ -7,9 +7,14 @@ public class Telefonia {
     /** O sistema deverá solicitar o tipo de assinante, pré-pago ou pós-pago.
      Depois solicitar os dados do assinante específico; */
     public void cadastrarAssinante() {
-        GerenciadorEntrada gerenciadorEntrada = new GerenciadorEntrada();
-        String tipoAssinante = gerenciadorEntrada.solicitarTipoAssinante();
+        GerenciadorEntrada gerenciadorEntrada = GerenciadorEntrada.getInstancia();
+        EnumClassificaçãoAssinantes tipoAssinante = gerenciadorEntrada.solicitarTipoAssinante();
         String[] dadosAssinante = gerenciadorEntrada.solicitarDadosAssinante();
+
+        System.out.println(tipoAssinante);
+        System.out.println(dadosAssinante[0].toString());
+        System.out.println(dadosAssinante[1].toString());
+        System.out.println(dadosAssinante[2].toString());
     }
 
     /** O sistema deverá listar os dados de todos os assinantes pré-pagos e
