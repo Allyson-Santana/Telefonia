@@ -34,7 +34,11 @@ public class Telefonia {
     public void implimirFaturas() {}
 
     /** encerra a execução do programa. */
-    public void sairDoPrograma() {}
+    public void sairDoPrograma() {
+        GerenciadorEntrada gerenciadorEntrada = GerenciadorEntrada.getInstancia();
+        gerenciadorEntrada.closeScanner();
+        System.exit(0);
+    }
 
     private PrePago localizarPrePago(long cpf) {return new PrePago(1 ,"nome",0);}
 

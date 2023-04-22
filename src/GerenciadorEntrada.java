@@ -84,4 +84,9 @@ public class GerenciadorEntrada {
         scanner.nextLine();
         return opcao;
     }
+
+    public void closeScanner() {
+        scanner.close();
+    }
+
 }
