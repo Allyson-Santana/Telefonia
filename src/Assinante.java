@@ -3,6 +3,8 @@ public class Assinante {
     private String nome;
     private int nummero;
     protected int numChamadas;
+
+    protected Chamada[] chamadas;
     
     public Assinante(long cpf, String nome, int numero) {
         this.cpf = cpf;

@@ -19,7 +19,7 @@ public class Menu {
 
            switch (opcao) {
                case 1:
-                   //System.out.println("Cadastrar assinante...");
+                   System.out.println("Cadastrar assinante...");
                    telefonia.cadastrarAssinante();
                    break;
                case 2:

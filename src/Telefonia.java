@@ -1,6 +1,11 @@
+import java.sql.Array;
+
 public class Telefonia {
     private int numPrePagos;
     private int numPosPagos;
+
+    private PrePago prePago;
+    private PosPago posPago;
 
     public Telefonia() {}
 
@@ -8,13 +13,34 @@ public class Telefonia {
      Depois solicitar os dados do assinante específico; */
     public void cadastrarAssinante() {
         GerenciadorEntrada gerenciadorEntrada = GerenciadorEntrada.getInstancia();
+        String cpfAssinante = gerenciadorEntrada.solicitarCpfAssinante();
         EnumClassificacaoAssinantes tipoAssinante = gerenciadorEntrada.solicitarTipoAssinante();
         String[] dadosAssinante = gerenciadorEntrada.solicitarDadosAssinante();
 
+        if (tipoAssinante.equals(EnumClassificacaoAssinantes.POSPAGO)) {
+            float assinatura = gerenciadorEntrada.solicitarValorAssinaturaPospago();
+            this.posPago = new PosPago(
+                    Long.valueOf(cpfAssinante).longValue(),
+                    dadosAssinante[0],
+                    Integer.valueOf(dadosAssinante[2]).intValue(),
+                    assinatura
+            );
+            this.numPosPagos++;
+        } else if (tipoAssinante.equals(EnumClassificacaoAssinantes.PREPAGO)) {
+            this.prePago = new PrePago(
+                    Long.valueOf(cpfAssinante).longValue(),
+                    dadosAssinante[0],
+                    Integer.valueOf(dadosAssinante[2]).intValue()
+            );
+            this.numPrePagos++;
+        }
+
+        System.out.println(cpfAssinante);
         System.out.println(tipoAssinante);
         System.out.println(dadosAssinante[0].toString());
         System.out.println(dadosAssinante[1].toString());
         System.out.println(dadosAssinante[2].toString());
+
     }
 
     /** O sistema deverá listar os dados de todos os assinantes pré-pagos e

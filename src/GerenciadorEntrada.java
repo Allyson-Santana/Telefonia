@@ -44,6 +44,13 @@ public class GerenciadorEntrada {
         return scanner.nextLine();
     }
 
+    public float solicitarValorAssinaturaPospago() {
+        System.out.println("Digite o valor da assinatura do Pospago: ");
+        float value = scanner.nextFloat();
+        scanner.nextLine();
+        return value;
+    }
+
     public String[] solicitarDadosAssinante() {
         String[] dados = new String[3];
         System.out.println("Digite o nome do assinante: ");
