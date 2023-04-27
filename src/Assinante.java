@@ -10,6 +10,7 @@ public class Assinante {
         this.cpf = cpf;
         this.nome = nome;
         this.nummero = numero;
+        this.chamadas = new Chamada[5];
     }
 
     public long getCpf() {
@@ -21,7 +22,6 @@ public class Assinante {
         return
                 "Cpf: "+this.cpf+"\n" +
                 "Nome: " +this.nome+"\n" +
-                "Numero: "+this.nummero+"\n" +
-                "Chamadas: " +this.nummero;
+                "Numero: "+this.nummero+"\n";
     }
 }

@@ -47,7 +47,7 @@ public class Menu {
                    System.out.println("Opção inválida...");
            }
 
-       } while(opcao < 1 || opcao > 6);
+       } while(opcao != 6);
    }
 
    public void exibirOpcoesMenu(boolean exibirOpcoes) {

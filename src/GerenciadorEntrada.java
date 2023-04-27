@@ -39,9 +39,11 @@ public class GerenciadorEntrada {
         return classificaçãoAssinantes;
     }
 
-    public String solicitarCpfAssinante() {
+    public Long solicitarCpfAssinante() {
         System.out.println("Digite o CPF do assinante: ");
-        return scanner.nextLine();
+        scanner.nextLine();
+        Long value = scanner.nextLong();
+        return value;
     }
 
     public float solicitarValorAssinaturaPospago() {
