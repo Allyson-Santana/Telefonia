@@ -36,7 +36,7 @@ public class Menu {
                    break;
                case 5:
                    System.out.println("Imprimir faturas...");
-                   telefonia.implimirFaturas();
+                   telefonia.imprimirFaturas();
                    break;
                case 6:
                    System.out.println("Sair do programa...");

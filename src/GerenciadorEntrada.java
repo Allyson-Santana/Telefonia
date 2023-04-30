@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.util.GregorianCalendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class GerenciadorEntrada {
     private static GerenciadorEntrada instancia;
@@ -32,17 +36,35 @@ public class GerenciadorEntrada {
                 classificaçãoAssinantes = EnumClassificacaoAssinantes.valueOf(input);
                 entradaValida = true;
             } catch (IllegalArgumentException e) {
-                System.out.println("Valor inválido. Digite PREPAGO ou POSPAGO: ");
+                System.out.println("Valor inválido.\nDigite PREPAGO ou POSPAGO: ");
             }
         } while (!entradaValida);
 
         return classificaçãoAssinantes;
     }
 
+    public int solicitarMesFaturas() {
+        System.out.println("Digite o nome do mes: ");
+        EnumMonth mes = null;
+        boolean entradaValida = false;
+
+        do {
+            String input = scanner.nextLine().toUpperCase();
+            try {
+                mes = EnumMonth.valueOf(input);
+                entradaValida = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Valor inválido. \nDigite o nome do mes: ");
+            }
+        } while (!entradaValida);
+
+        return mes.ordinal();
+    }
+
     public Long solicitarCpfAssinante() {
         System.out.println("Digite o CPF do assinante: ");
-        scanner.nextLine();
         Long value = scanner.nextLong();
+        scanner.nextLine();
         return value;
     }
 
@@ -64,28 +86,40 @@ public class GerenciadorEntrada {
         return dados;
     }
 
-    public String[] solicitarDadosChamada() {
-        String[] dados = new String[2];
-        System.out.println("Digite a data da chamada: ");
-        dados[0] = scanner.nextLine();
-        System.out.println("Digite a duração da chamada: ");
-        dados[1] = scanner.nextLine();
-        return dados;
+    public GregorianCalendar solicitarData() {
+        System.out.println("Digite a data (formato dd/MM/yyyy HH:mm:ss");
+        String dataHoraStr = scanner.nextLine();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        GregorianCalendar dataHora = new GregorianCalendar();
+
+        try {
+            Date dataHoraDate = sdf.parse(dataHoraStr);
+            dataHora.setTime(dataHoraDate);
+        } catch (ParseException e) {
+            System.out.println("Data inválida");
+            scanner.nextLine();
+            dataHora = null;
+        }
+
+        return dataHora;
     }
 
-    public String[] solicitarDadosRecarga() {
-        String[] dados = new String[2];
-        System.out.println("Digite a data da recarga: ");
-        dados[0] = scanner.nextLine();
+    public float solicitarValorRecarga() {
+        float valor = 0f;
         System.out.println("Digite o valor da recarga: ");
-        dados[1] = scanner.nextLine();
-        return dados;
+        valor = scanner.nextFloat();
+        scanner.nextLine();
+        return valor;
+    }
+    public int solicitarDuracaoChamada() {
+        int duracao = 0;
+        System.out.println("Digite a duracao da chamada em minutos: ");
+        duracao = scanner.nextInt();
+        scanner.nextLine();
+        return duracao;
     }
 
-    public String solicitarMesFaturas() {
-        System.out.println("Digite o mês das faturas: ");
-        return scanner.nextLine();
-    }
 
     public int getOpcao() {
         System.out.print("\nDigite sua opção: ");

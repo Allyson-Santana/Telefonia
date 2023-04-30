@@ -1,15 +1,16 @@
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Chamada {
-    private Date data;
+    private GregorianCalendar data;
     private int duracao;
 
-    public Chamada(Date data,int duracao) {
+    public Chamada(GregorianCalendar data, int duracao) {
         this.data = data;
         this.duracao = duracao;
     }
 
-    public Date getData() {
+    public GregorianCalendar getData() {
         return this.data;
     }
     public int getDuracao() {
@@ -18,7 +19,7 @@ public class Chamada {
 
     @Override
     public String toString() {
-        return "A chamada foi feita em "+this.data+" com duração de "+this.duracao+" Minutes";
+        return "A chamada foi feita em "+this.data.getTime()+"\ncom duração de "+this.duracao+" Minutes";
     }
 
 }

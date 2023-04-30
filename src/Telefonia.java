@@ -1,4 +1,5 @@
 import java.sql.Array;
+import java.util.GregorianCalendar;
 
 public class Telefonia {
     private int numPrePagos;
@@ -19,7 +20,7 @@ public class Telefonia {
         EnumClassificacaoAssinantes tipoAssinante = gerenciadorEntrada.solicitarTipoAssinante();
 
         boolean is_pospago = tipoAssinante.equals(EnumClassificacaoAssinantes.POSPAGO);
-        boolean is_prepago = tipoAssinante.equals(EnumClassificacaoAssinantes.POSPAGO);
+        boolean is_prepago = tipoAssinante.equals(EnumClassificacaoAssinantes.PREPAGO);
 
         if (is_pospago) {
             if (numPosPagos >= this.posPago.length) {
@@ -27,7 +28,21 @@ public class Telefonia {
                 return;
             }
             float assinatura = gerenciadorEntrada.solicitarValorAssinaturaPospago();
-            Long cpfAssinante = gerenciadorEntrada.solicitarCpfAssinante();
+
+            Long cpfAssinante;
+
+            while (true) {
+                cpfAssinante = gerenciadorEntrada.solicitarCpfAssinante();
+                PosPago assinante_pos = localizarPosPago(cpfAssinante);
+                PrePago assinante_pre = localizarPrePago(cpfAssinante);
+
+                if (assinante_pos == null && assinante_pre == null) {
+                    break;
+                } else {
+                    System.out.println("CPF já cadastrado!");
+                }
+            }
+
             String[] dadosAssinante = gerenciadorEntrada.solicitarDadosAssinante();
             this.posPago[this.numPosPagos] = new PosPago(
                     cpfAssinante,
@@ -43,7 +58,20 @@ public class Telefonia {
                 System.out.println("Limite de Assinanntes Pospagos");
                 return;
             }
-            Long cpfAssinante = gerenciadorEntrada.solicitarCpfAssinante();
+            Long cpfAssinante;
+
+            while (true) {
+                cpfAssinante = gerenciadorEntrada.solicitarCpfAssinante();
+                PosPago assinante_pos = localizarPosPago(cpfAssinante);
+                PrePago assinante_pre = localizarPrePago(cpfAssinante);
+
+                if (assinante_pos == null && assinante_pre == null) {
+                    break;
+                } else {
+                    System.out.println("CPF já cadastrado!");
+                }
+            }
+
             String[] dadosAssinante = gerenciadorEntrada.solicitarDadosAssinante();
             this.prePago[this.numPrePagos] = new PrePago(
                     cpfAssinante,
@@ -58,13 +86,13 @@ public class Telefonia {
     /** O sistema deverá listar os dados de todos os assinantes pré-pagos e
      pós-pagos cadastrados; */
     public void listarAssinante() {
+        System.out.println("\nTODOS OS POSPAGOS...\n");
         for (PosPago pos: this.posPago) {
-            System.out.println("POSPAGOS\n");
             if (pos == null) break;
             System.out.println(pos.toString());
         }
+        System.out.println("\nTODOS OS PREPAGOS..\n");
         for (PrePago pre: this.prePago) {
-            System.out.println("PREPAGOS\n");
             if (pre == null)   break;
             System.out.println(pre.toString());
         }
@@ -76,14 +104,24 @@ public class Telefonia {
         GerenciadorEntrada gerenciadorEntrada = GerenciadorEntrada.getInstancia();
         Long cpfAssinante = gerenciadorEntrada.solicitarCpfAssinante();
         PosPago assinante_pos = localizarPosPago(cpfAssinante);
+        PrePago assinante_pre = localizarPrePago(cpfAssinante);
 
-        if (assinante_pos != null) {
-            // code...
-            String[] dados = gerenciadorEntrada.solicitarDadosChamada();
-            System.out.println(dados[0]);
-            System.out.println(dados[1]);
-        } else {
-            System.out.println("Assinante Não localizado...");
+        if (assinante_pre != null) {
+            GregorianCalendar dataHora = gerenciadorEntrada.solicitarData();
+            if (dataHora != null) {
+                int duracao = gerenciadorEntrada.solicitarDuracaoChamada();
+                assinante_pre.fazerChamada(dataHora, duracao);
+            }
+        }
+        else if (assinante_pos != null) {
+            GregorianCalendar dataHora = gerenciadorEntrada.solicitarData();
+            if (dataHora != null) {
+                int duracao = gerenciadorEntrada.solicitarDuracaoChamada();
+                assinante_pos.fazerChamada(dataHora, duracao);
+            }
+        }
+        else {
+            System.out.println("Assinante Não localizado...\n");
         }
     }
 
@@ -95,19 +133,35 @@ public class Telefonia {
         PrePago assinante_pre = localizarPrePago(cpfAssinante);
 
         if (assinante_pre != null) {
-            // code...
-            String[] dados = gerenciadorEntrada.solicitarDadosRecarga();
-            System.out.println(dados[0]);
-            System.out.println(dados[1]);
+            GregorianCalendar dataHora = gerenciadorEntrada.solicitarData();
+            if (dataHora != null) {
+                float valor = gerenciadorEntrada.solicitarValorRecarga();
+                assinante_pre.recarregar(dataHora, valor);
+            }
         } else {
-            System.out.println("Assinante Não localizado...");
+            System.out.println("Assinante prepago Não localizado...\n");
         }
 
     }
 
     /** O sistema deverá solicitar o mês e imprimir todas as faturas dos assinantes
      pré-pagos e pós-pagos;*/
-    public void implimirFaturas() {}
+    public void imprimirFaturas() {
+        GerenciadorEntrada gerenciadorEntrada = GerenciadorEntrada.getInstancia();
+        int mes = gerenciadorEntrada.solicitarMesFaturas();
+
+        System.out.println("\nFATURAS DE TODOS OS POSPAGOS...");
+        for (PosPago pos: this.posPago) {
+            if (pos == null) break;
+            pos.imprimirFaturas(mes);
+        }
+        System.out.println("\nFATURAS DE TODOS OS PREPAGOS...");
+        for (PrePago pre: this.prePago) {
+            if (pre == null)   break;
+            pre.imprimirFaturas(mes);
+        }
+
+    }
 
     /** encerra a execução do programa. */
     public void sairDoPrograma() {

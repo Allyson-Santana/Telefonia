@@ -2,7 +2,7 @@ public class Assinante {
     private long cpf;
     private String nome;
     private int nummero;
-    protected int numChamadas;
+    protected int numChamadas = 0;
 
     protected Chamada[] chamadas;
     
@@ -20,8 +20,8 @@ public class Assinante {
     @Override
     public String toString() {
         return
-                "Cpf: "+this.cpf+"\n" +
-                "Nome: " +this.nome+"\n" +
-                "Numero: "+this.nummero+"\n";
+                "  Cpf: "+this.cpf+"\n" +
+                "  Nome: " +this.nome+"\n" +
+                "  Numero: "+this.nummero;
     }
 }
