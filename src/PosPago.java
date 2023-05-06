@@ -15,14 +15,8 @@ public class PosPago extends Assinante {
             return;
         }
 
-        // Tira Duvida Sobre
-        if (this.assinatura < (1.04) * duracao) {
-            System.out.println("Assinante com limite de assinatura.\n");
-            return;
-        }
-
         this.chamadas[this.numChamadas] = new Chamada(data, duracao);
-        this.assinatura -= (1.04) * duracao;
+        this.assinatura += (1.04) * duracao;
         this.numChamadas++;
 
         System.out.println("Valor da assinatura: " + this.assinatura);
