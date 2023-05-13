@@ -76,13 +76,11 @@ public class GerenciadorEntrada {
     }
 
     public String[] solicitarDadosAssinante() {
-        String[] dados = new String[3];
+        String[] dados = new String[2];
         System.out.println("Digite o nome do assinante: ");
         dados[0] = scanner.nextLine();
-        System.out.println("Digite o endereço do assinante: ");
-        dados[1] = scanner.nextLine();
         System.out.println("Digite o telefone do assinante: ");
-        dados[2] = scanner.nextLine();
+        dados[1] = scanner.nextLine();
         return dados;
     }
 

@@ -47,7 +47,7 @@ public class Telefonia {
             this.posPago[this.numPosPagos] = new PosPago(
                     cpfAssinante,
                     dadosAssinante[0],
-                    Integer.valueOf(dadosAssinante[2]).intValue(),
+                    Integer.valueOf(dadosAssinante[1]).intValue(),
                     assinatura
             );
             this.numPosPagos++;
@@ -76,7 +76,7 @@ public class Telefonia {
             this.prePago[this.numPrePagos] = new PrePago(
                     cpfAssinante,
                     dadosAssinante[0],
-                    Integer.valueOf(dadosAssinante[2]).intValue()
+                    Integer.valueOf(dadosAssinante[1]).intValue()
             );
             this.numPrePagos++;
         }

@@ -16,7 +16,6 @@ public class PosPago extends Assinante {
         }
 
         this.chamadas[this.numChamadas] = new Chamada(data, duracao);
-        this.assinatura += (1.04) * duracao;
         this.numChamadas++;
 
         System.out.println("Valor da assinatura: " + this.assinatura);
@@ -26,6 +25,8 @@ public class PosPago extends Assinante {
     }
 
     public void imprimirFaturas(int mes) {
+        float valorChamadaTotal = 0f;
+        float valorChamada = 0f;
         System.out.println("===============================");
 
         System.out.println("Dados Pessoais...");
@@ -36,12 +37,16 @@ public class PosPago extends Assinante {
             if (mes == this.chamadas[i].getData().get(Calendar.MONTH)) {
                 System.out.println("\n  Data: " + this.chamadas[i].getData().getTime());
                 System.out.println("  Duracao: " + this.chamadas[i].getDuracao());
-                System.out.println("  valorChamada: " + this.chamadas[i].getDuracao() * 1.04);
+                valorChamada = (float) (this.chamadas[i].getDuracao() * 1.04);
+                System.out.println("  valorChamada: " + valorChamada);
+                valorChamadaTotal += valorChamada;
+                if (valorChamadaTotal > this.assinatura)
+                    this.assinatura = valorChamadaTotal;
             } else {
                 System.out.println("  Nenhuma...");
             }
         }
-        System.out.print("  Valor da assinatura: " + this.assinatura);
+        System.out.print("\n  Valor final da assinatura: " +  this.assinatura);
 
         System.out.println("\n");
     }

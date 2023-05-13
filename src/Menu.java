@@ -52,7 +52,7 @@ public class Menu {
 
    public void exibirOpcoesMenu(boolean exibirOpcoes) {
         if (exibirOpcoes) {
-            System.out.println("(1) Cadastrar assinante.");
+            System.out.println("\n\n(1) Cadastrar assinante.");
             System.out.println("(2) Listar assinantes.");
             System.out.println("(3) Fazer chamada.");
             System.out.println("(4) Fazer recarga.");
