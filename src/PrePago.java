@@ -11,7 +11,7 @@ public class PrePago extends Assinante {
         this.recargas = new Recarga[5];
     }
 
-    public void recarregar(GregorianCalendar data, float valor) {
+    public void fazerRecarga(GregorianCalendar data, float valor) {
         if (this.numRecargas >= this.recargas.length) {
             System.out.println("Assinannte com limite de recarga.");
             return;
@@ -19,10 +19,6 @@ public class PrePago extends Assinante {
         this.recargas[this.numRecargas] = new Recarga(data, valor);
         this.creditos += valor;
         this.numRecargas++;
-
-        System.out.println("creditos: " + this.creditos);
-        System.out.println("numRecargas: " + this.numRecargas);
-        System.out.println("Data: " + this.recargas[this.numRecargas-1].getData().getTime());
     }
 
     public Float fazerChamada(GregorianCalendar data, int duracao) {
@@ -42,15 +38,12 @@ public class PrePago extends Assinante {
         this.creditos -= (1.45) * duracao;
         this.numChamadas++;
 
-        System.out.println("credito restate: " + this.creditos);
-        System.out.println("numChamadas: " + this.numChamadas);
-        System.out.println("Data Chamada: " + this.chamadas[this.numChamadas-1].getData().getTime());
-        System.out.println("Duracao Chamada: " + this.chamadas[this.numChamadas-1].getDuracao());
-
         return creditos;
     }
 
     public void imprimirFaturas(int mes) {
+        float valorTotalChamdas = 0f;
+        float valorTotalRecargas = 0f;
         System.out.println("===============================");
 
         System.out.println("Dados Pessoais...");
@@ -59,24 +52,29 @@ public class PrePago extends Assinante {
         System.out.print("\nChamadas...");
         for (int i = 0; i < this.numChamadas; i++) {
             if (mes == this.chamadas[i].getData().get(Calendar.MONTH)) {
-                System.out.println("\n  Data: " + this.chamadas[i].getData().getTime());
-                System.out.println("  Duracao: " + this.chamadas[i].getDuracao());
-                System.out.println("  valorChamada:" + this.chamadas[i].getDuracao() * 1.45);
+                System.out.println("\n Chamada["+i+"]: " + this.chamadas[i].toString());
+                float _valorTotalChamdas = (float)(this.chamadas[i].getDuracao() * 1.45);
+                System.out.println("  valorChamada:" + _valorTotalChamdas);
+                valorTotalChamdas += _valorTotalChamdas;
             } else {
                 System.out.print("  Nenhuma...");
             }
         }
+
+        System.out.println(" Total gasto em chamadas: "+valorTotalChamdas+" \n");
 
         System.out.print("\nRecarrega...");
         for (int i = 0; i < this.numRecargas; i++) {
             if (mes == this.recargas[i].getData().get(Calendar.MONTH)) {
-                System.out.println("\n  Data: " + this.recargas[i].getData().getTime());
-                System.out.println("  Valor da recarrega: " + this.recargas[i].getValor());
+                System.out.println("\n Recarga["+i+"]: " + this.recargas[i].toString());
+                float _valorTotalRecargas = this.recargas[i].getValor();
+                valorTotalRecargas += _valorTotalRecargas;
             } else {
                 System.out.print("  Nenhuma...");
             }
         }
 
-        System.out.println("\n");
+        System.out.println("\n Total gasto em recarga: "+valorTotalRecargas+" \n");
+
     }
 }

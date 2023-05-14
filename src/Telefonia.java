@@ -136,7 +136,7 @@ public class Telefonia {
             GregorianCalendar dataHora = gerenciadorEntrada.solicitarData();
             if (dataHora != null) {
                 float valor = gerenciadorEntrada.solicitarValorRecarga();
-                assinante_pre.recarregar(dataHora, valor);
+                assinante_pre.fazerRecarga(dataHora, valor);
             }
         } else {
             System.out.println("Assinante prepago Não localizado...\n");
